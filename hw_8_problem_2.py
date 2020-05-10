@@ -1,24 +1,19 @@
 """
-Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 """
 
-def three_sum(s):
-    s = sorted(s)
-    output = set()
-    for k in range(len(s)):
-        target = -s[k]
-        i,j = k+1, len(s)-1
-        while i < j:
-            sum_two = s[i] + s[j]
-            if sum_two < target:
-                i += 1
-            elif sum_two > target:
-                j -= 1
-            else:
-                output.add((s[k],s[i],s[j]))
-                i += 1
-                j -= 1
-    return output
+def removeDuplicates(nums):
+    len_ = 1
+    if len(nums) == 0:
+        return 0
+    for i in range(1, len(nums)): # Access passed in array which could be n elements long so O(n) time.
+        if nums[i] != nums[i-1]:
+            nums[len_] = nums[i]
+            len_ +=1
+    return len_
 
-nums = [-1, 0, 1, 2, -1, -4]
-print(three_sum(nums))
+nums = [0,0,1,1,1,2,2,3,3,4]
+print(removeDuplicates(nums))
+
+# Overall the time complexity looks to be O(n) time.
